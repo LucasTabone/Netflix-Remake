@@ -64,7 +64,7 @@
             android:textColor="@color/gray_light"
             android:textSize="14sp"
             app:layout_constraintTop_toBottomOf="@id/movie_img"
-            tools:text=" ola mundo ola mundo ola mundo ola mundo ola mundo ola mundo ola mundo ola mundo ola mundo ola mundo ola mundo ola mundo ola mundo ola mundo ola mundo ola mundo ola mundo " />
+            tools:text="ola mundo ola mundo ola mundo ola mundo ola mundo ola mundo ola mundo ola mundo ola mundo ola mundo ola mundo ola mundo ola mundo ola mundo ola mundo ola mundo ola mundo " />
 
         <TextView
             android:id="@+id/movie_txt_cast"
@@ -79,7 +79,7 @@
             android:textColor="@android:color/darker_gray"
             android:textSize="14sp"
             app:layout_constraintTop_toBottomOf="@id/movie_txt_desc"
-            tools:text=" ola mundo ola mundo ola mundo ola mundo ola mundo ola mundo ola mundo ola mundo ola mundo ola mundo ola mundo ola mundo ola mundo ola mundo ola mundo ola mundo ola mundo " />
+            tools:text="ola mundo ola mundo ola mundo ola mundo ola mundo ola mundo ola mundo ola mundo ola mundo ola mundo ola mundo ola mundo ola mundo ola mundo ola mundo ola mundo ola mundo " />
 
         <TextView
             android:id="@+id/txt_fixed"
