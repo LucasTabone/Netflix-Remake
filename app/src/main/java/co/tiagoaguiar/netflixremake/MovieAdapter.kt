@@ -3,16 +3,19 @@ package co.tiagoaguiar.netflixremake
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.ImageView
 import androidx.annotation.LayoutRes
 import androidx.recyclerview.widget.RecyclerView
 import co.tiagoaguiar.netflixremake.model.Movie
+import com.squareup.picasso.Picasso
 
 //lISTA HORIZONTAL
 
 class MovieAdapter(
     private val movies: List<Movie>,
-    @LayoutRes private val layoutId: Int
+    @LayoutRes private val layoutId: Int,
+    private val onItemClickListener: ((Int) -> Unit)? = null
    ) : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
@@ -33,9 +36,11 @@ class MovieAdapter(
     inner class MovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(movie: Movie) {
             val imageCover: ImageView = itemView.findViewById(R.id.img_cover)
+            imageCover.setOnClickListener {
+               onItemClickListener?.invoke(movie.id)
+            }
 
-            // todo: aqui vai trocar por uma URL que vira do servidor
-           // imageCover.setImageResource(movie.coverUrl)
+            Picasso.get().load(movie.coverUrl).into(imageCover)
         }
     }
 
