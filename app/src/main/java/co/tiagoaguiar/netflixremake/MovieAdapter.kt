@@ -1,5 +1,6 @@
 package co.tiagoaguiar.netflixremake
 
+import android.graphics.Bitmap
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -7,6 +8,7 @@ import android.widget.AdapterView
 import android.widget.ImageView
 import androidx.annotation.LayoutRes
 import androidx.recyclerview.widget.RecyclerView
+import co.tiagoaguiar.netflixremake.Util.DownloadImageTask
 import co.tiagoaguiar.netflixremake.model.Movie
 import com.squareup.picasso.Picasso
 
@@ -39,8 +41,12 @@ class MovieAdapter(
             imageCover.setOnClickListener {
                onItemClickListener?.invoke(movie.id)
             }
+            DownloadImageTask(object : DownloadImageTask.Callback {
+                override fun onResult(bitmap: Bitmap) {
+                    imageCover.setImageBitmap(bitmap)
+                }
+            }).execute(movie.coverUrl)
 
-            Picasso.get().load(movie.coverUrl).into(imageCover)
         }
     }
 

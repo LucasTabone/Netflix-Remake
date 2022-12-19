@@ -17,20 +17,21 @@ import javax.net.ssl.HttpsURLConnection
 import javax.security.auth.callback.Callback
 import kotlin.math.log
 
-class CategoryTask(private val  callback: Callback) {
+class CategoryTask(private val callback: Callback) {
 
     private val handler = android.os.Handler(Looper.getMainLooper())
+    val executor = Executors.newSingleThreadExecutor()
 
     interface Callback {
         fun onPreExecute()
-      fun onResult(categories: List<Category>)
-      fun onFailure(message: String)
+        fun onResult(categories: List<Category>)
+        fun onFailure(message: String)
     }
 
     fun execute(url: String) {
         callback.onPreExecute()
         // nesse momento, estamos utilizando a UI-THREAD (1)
-        val executor = Executors.newSingleThreadExecutor()
+
 
         executor.execute {
             var urlConnection: HttpsURLConnection? = null
@@ -44,8 +45,7 @@ class CategoryTask(private val  callback: Callback) {
                 urlConnection.readTimeout = 2000 // tempo de Leitura (2segundos)
                 urlConnection.connectTimeout = 2000 // tempo de conexão (2segundos)
 
-                val statusCode: Int =
-                    urlConnection.responseCode //garantias de resposta com o servidor
+                val statusCode: Int = urlConnection.responseCode //garantias de resposta com o servidor
                 if (statusCode > 400) {
                     throw IOException("Erro na comunicação com o servidor")
                 }
@@ -64,7 +64,7 @@ class CategoryTask(private val  callback: Callback) {
                 val message = e.message ?: "erro desconhecido"
                 Log.e("Teste", message, e)
                 handler.post {
-                callback.onFailure(message)
+                    callback.onFailure(message)
                 }
             } finally {
                 urlConnection?.disconnect()
